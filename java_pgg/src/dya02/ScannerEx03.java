@@ -2,7 +2,7 @@ package dya02;
 
 import java.util.Scanner;
 
-public class ScannerEx {
+public class ScannerEx03 {
 
 	public static void main(String[] args) {
 		
