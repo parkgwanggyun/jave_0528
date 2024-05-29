@@ -15,13 +15,13 @@ public class ScannerEx04 {
 		System.out.println("어떤 연산을 수행하시겠습니까?" + ("+(더하기), - (빼기), *(곱하기), / (나누기), %(나머지)"));
 		String user = sc.nextLine();
 		
-		/*String result =
+		String result =
 				user.equals("+")? ""+(num1+num2) :
 				(user.equals("-")? ""+(num1-num2)	:
 					(user.equals("/")? ""+(Math.round((num1/num2)*10)/10.0):
 						(user.equals("*")? ""+(Math.round((num1*num2)*10)/10.0) :
-							(user.equals("%")? ""+(num1%num2):"확인불가") )));
-							System.out.println(result);*/
+							(user.equals("%")? ""+(num1%num2):"") )));
+							System.out.println(result);
 	}
 
 }
