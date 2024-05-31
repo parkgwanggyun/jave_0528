@@ -1,4 +1,4 @@
-package dya02;
+package day02;
 
 public class AritmeticOperatorEx {
 

@@ -1,4 +1,4 @@
-package dya02;
+package day02;
 
 public class StringEx02 {
 	//문자열 더하기 예제
