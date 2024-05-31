@@ -27,7 +27,7 @@ public class HorJjak {
 		int money = account; //이기고 짐에 따라 변하게 될 금액
 		
 		String choice = null; //홀인지 짝인지 선택
-		int bet = 0; //베팅할 금액
+		int beting = 0; //베팅할 금액
 		int num = 0; //홀(1) 이나 짝(2)을 저장할 변수
 		String choS = null; //선택한 홀, 짝을 한글로 저장
 		String result = null; //랜덤 (홀,짝)의 결과
@@ -62,7 +62,7 @@ public class HorJjak {
 							System.out.println("*bet: ");
 							//따로 엔터를 버퍼에서 제거하는 것이 번거러울 경우
 							//아래와 같은 방법도 있습니다.
-							bet = Integer.parseInt(sc.nextLine());
+							beting = Integer.parseInt(sc.nextLine());
 							isString = false;
 					}catch (NumberFormatException e) {
 							System.out.println("돈을 정수로 입력하세요");
@@ -70,12 +70,12 @@ public class HorJjak {
 			}
 			
 			//가지고 있는 돈보다 많이 걸 경우 다시 메뉴로
-			if(money < bet) {
+			if(money < beting) {
 					System.out.println("돈이 부족하다.");
 					continue;
 			}
 			//가지고 있는 돈에서 베팅한 돈만큼 차감
-			money -= bet;
+			money -= beting;
 			
 			//random() 메서드를 이용해서 홀(1) 이나 짝(2) 가져와 num에 정수 저장
 			num = (int)(Math.random()*2) + 1;
@@ -87,7 +87,7 @@ public class HorJjak {
 			if(choS.equals(result)) {
 				System.out.println("*success");
 				//베팅한 돈의 2배를 현재 가지고 있는 돈에 더해줌
-				money += bet*2;
+				money += beting*2;
 			}
 			//결과가 다르면 그대로 베팅한 돈을 잃는다.
 			else {
@@ -98,15 +98,18 @@ public class HorJjak {
 			if(money ==0) {
 				System.out.println("game set");
 				//재도전 여부를 물어보고
-				System.out.println("재도전 (Y/N): ");
+				System.out.println("재도전 (y/n): ");
 				String str = sc.nextLine();
 				//y를 입력했다면 초기 정했던 시작 돈으로 게임을 재시작
 				if(str.equals("y")) {
 						money = account;
 						continue;
 				}
+				//y의외의 값을 입력했다면 게임 종료
+				System.out.println("게임 종료");
+				break;
+				}
 			}
 		}
 		}
-	}
 
