@@ -11,15 +11,13 @@ public class WhileEx08_01 {
 			if(num1 % i == 0 && num2 %i ==0) {
 				gcd = i;
 			}
-			if(num1 % i == 0) {
+			 if(num1 % i == 0) {
 				if(num2 % i ==0) {
 					gcd= i;
 				}
 				i++;
 			}
 			System.out.println(num1 + "과" + num2 + "의 최대 공약수 : " + gcd);
-		}
-
-	}
-
 }
+	}
+	}
