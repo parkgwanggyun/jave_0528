@@ -23,13 +23,13 @@ public class UpDownGame {
 		do {
 			System.out.println("숫자를 입력해주세요");
 			num1 = sc.nextInt();
-			if (num1 > random) {
+			if (num1 > random) { //num1 = 입력받은 수가 랜덤 숫자보다 작을때 다운나오게하기
 				System.out.println("Down");
-			}else if(num1 < random) {
+			}else if(num1 < random) { //num1 = 입력받은 수가 랜덤한 숫자보다 클때 업나게하기
 				System.out.println("Up");
-			}else {
+			}else { // 위에 사항 외 의 정답이 나왔을때 정답문구 나오게하기
 				System.out.println("정답입니다" + random + "입니다" );
-			}
+			}// 정답이 나올때 까지 반복하기 위해 num1과 랜덤이 틀릴때 반복하게 만들기
 		}while (num1 != random);
 	}
 }
