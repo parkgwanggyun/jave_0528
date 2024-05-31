@@ -14,7 +14,7 @@ public class NestedForEx02 {
 					c = c+1;
 			
 		}
-		if (c==2); {
+		if (c==2) {
 			
 		}
 	}
