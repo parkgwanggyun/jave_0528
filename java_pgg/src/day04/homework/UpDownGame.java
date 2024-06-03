@@ -18,7 +18,7 @@ public class UpDownGame {
 		 */
 		Scanner sc = new Scanner(System.in);
 		int min = 1, max = 100;
-		int random = (int)(Math.random() * (max = min + 1) + min);
+		int random = (int)(Math.random() * (max - min + 1) + min);
 		int num1;
 		do {
 			System.out.println("숫자를 입력해주세요");
