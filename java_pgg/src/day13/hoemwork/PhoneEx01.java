@@ -1,5 +1,7 @@
 package day13.hoemwork;
 
+import java.util.Scanner;
+
 public class PhoneEx01 {
 	/* 연락처 관리를 위한 프로그램을 만드세요
 	 * 메뉴
@@ -101,6 +103,66 @@ public class PhoneEx01 {
 	 * 번호를 삭제했습니다.
 	 */
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int munu;
+		String name;
+		String num;
+		String [] Point = new String[10];
+		String tem = null;
+		do {
+			System.out.println("---------------");
+			System.out.println("메뉴");
+			System.out.println("1. 연락처 추가 ");
+			System.out.println("2. 연락처 수정 ");
+			System.out.println("3. 연락처 삭제 ");
+			System.out.println("4. 연락처 검색 ");
+			System.out.println("5. 프로그램 종료 ");
+			System.out.print("메뉴 선택 : ");
+			System.out.println("");
+			System.out.println("---------------");
+			munu = sc.nextInt();
+			if(munu == 1) {
+				System.out.println("---------------");
+				System.out.print("이름 : ");
+				name = sc.next();
+				System.out.println("---------------");
+				System.out.print("번호 : ");
+				num = sc.next();
+				System.out.println("---------------");
+				System.out.println("등록이 완료됐습니다.");
+				//배열 사용해서 저장하기
+				for(int i =0; i < Point.length; i++) {
+					Point[i] = tem;
+					tem = name , num;
+				}
+			}if(munu == 2) {
+				//배열을 전체 탐색하기
+				System.out.print("검색할 이름을 작성하세요(전체 검색 : 엔터) : ");
+				name = sc.next();
+				System.out.print("번호 선택 : ");
+				num = sc.next();
+				//배열에서 선택하기
+				System.out.print("수정 이름 : ");
+				name = sc.next();
+				System.out.print("수정 번호 : ");
+				num = sc.nextInt();
+				//배열에 있는값을 수정하기
+			}if(munu == 3) {
+				System.out.print("이름 : ");
+				name = sc.next();
+				//배열에서 검색
+				System.out.print("삭제할 번호 선택 : ");
+				num = sc.next();
+				//배열에서 선택 후 해당 지점 삭제하기
+			}if(munu == 4) {
+				//배열전체 검색하기
+				System.out.print("검색할 이름을 작성하세요(전체 검색 : 엔터) : ");
+				name = sc.next();
+				System.out.print("번호 선택 : ");
+				num = sc.next();
+				//지점에 저장된 정보 확인하기
+			}
+		}while(munu != 5);
 		
 
 	}
