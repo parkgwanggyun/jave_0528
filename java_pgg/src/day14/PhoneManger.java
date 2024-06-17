@@ -2,8 +2,9 @@ package day14;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import program.Program;
 
-public class PhoneManger {
+public class PhoneManger implements Program{
 	
 	private Contact [] list;
 	private int count;
@@ -31,15 +32,16 @@ public class PhoneManger {
 		switch (menu) {
 		case INSERT: 
 			insert();
+			expand();
 			break;
 		case UPDATE:
 			update();
 			break;
 		case DELETE:
-			
+			delete();
 			break;
 		case SEARCH:
-			
+			search();
 			break;
 		case EXIT:
 			System.out.println("프로그램을 종료합니다.");
@@ -47,6 +49,59 @@ public class PhoneManger {
 		default:
 			System.out.println("잘못된 메뉴 선택입니다.");
 	}
+}
+	private void expand() {
+		//다 찼는지 확인해서 찬 찼으면 종료
+		if(list.length == count) {
+			return;
+		}
+		//찼으면 10개를 추가
+		Contact[] tmp = new Contact[list.length + 10];
+		System.arraycopy(list, 0, tmp, list.length);
+		list = tmp;
+	}
+
+	private void search() {
+		//이름을 입력
+		System.out.println("검색할 이름을 작성하세요(전체 검색 : 엔터) : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		//이름에 맞는 연락처를 출력
+		printContact(name);		
+	}
+
+	private void delete() {
+		//이름 입력
+		System.out.println("이름 : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		//이름과 일치하는 연락처들을 출력
+		printContact(name);
+		//번호를 선택
+		int index = sc.nextInt()-1;
+		//번호가 유효한지 확인해서 유효하지 않으면 안내문구 출력 후 종료
+		if(!checkContact(name, index)) {
+			System.out.println("잘못 선택했습니다.");
+			return;
+		}
+		
+		//번호를 삭제
+		//해당 번지에서 앞으로 한칸씩 당겨줘야 함
+
+		count--;
+		//번지가 마지막 번지가 아니면
+		if(index != count) {
+			Contact [] tmp = new Contact[list.length];
+			//4,2
+			System.arraycopy(tmp, index+1, list, index, count - index);
+			//연락처 개수를 1감소
+		}
+		
+		list[count] = null;
+		System.out.println("연락처를 삭제했습니다.");
+		
+	}
+
 	private void update() throws Exception {
 		//이름 입력
 				sc.nextLine();//공백 처리
@@ -136,15 +191,7 @@ public class PhoneManger {
 		
 	}
 	private int indexOf(Contact contact) {
-		if(list == null || count == 0) {
-			return -1;
-		}
-		for(int i = 0; i < count; i++) {
-			if(list[i].equals(contact)) {
-				return i;
-			}
-		}
-		return -1;
+		return indexOf(-1 , contact);
 	}
 	private int indexOf(int index,Contact contact) {
 			if(list == null || count == 0) {
