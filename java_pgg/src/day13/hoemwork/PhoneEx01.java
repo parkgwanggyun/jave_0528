@@ -161,7 +161,7 @@ public class PhoneEx01 {
 			break;
 		case 2:
 			update(list,count);
-			
+			break;
 		case 3:
 			count = delete(list,count);
 			break;
@@ -308,6 +308,12 @@ public class PhoneEx01 {
 		}
 		list[index] = contact;
 	}
+	/**
+	 * 기능 : 연락처 리스트에 삭제할 연락처 정보를 입력받아 삭제하고 저장된 개수를 알려주는 메소드
+	 * @param list 연락처 리스트
+	 * @param count 저장된 개수
+	 * @return 삭제 후 저장된 개수(삭제 성공이면 -1,실패면 그대로)
+	 */
 	public static int delete(Contact[] list, int count) {
 		//이름 입력
 		System.out.println("이름 : ");
@@ -339,6 +345,11 @@ public class PhoneEx01 {
 		System.out.println("연락처를 삭제했습니다.");
 		return count;
 	}
+	/**
+	 * 기능 : 연락처 리스트에 이름을 입력받아 일치하는 연락처를 출력하는 메소드
+	 * @param list 연락처 리스트
+	 * @param count 저장된 개수
+	 */
 	public static void search(Contact[] list, int count) {
 		//이름을 입력
 		System.out.println("검색할 이름을 작성하세요(전체 검색 : 엔터) : ");
@@ -399,10 +410,10 @@ class Contact{  //시작
 		//주어진 번호가 전화 번호 형태가 아니면 예외를 발생 시키고 맞으면 번호에 저장
 		//010-1234-5678 또는 02-123-4568 또는 041-1234-5678 형태의 문자열을
 		//처리하기 위한 정규표현식
-		String regex = "^\\d${2,3}-\\d{3,4}-\\d{4}$";
-		if(Pattern.matches(regex, number)) {
-			throw new Exception("주어진 번호는 번호 형태가 아닙니다.");
+		 String regex = "^(010|\\d{2,3})-\\d{3,4}-\\d{4}$";
+		    if (!Pattern.matches(regex, number)) {
+		        throw new Exception("주어진 번호는 올바른 전화 번호 형식이 아닙니다.");
+		    }
+		    this.number = number;
 		}
-		this.number = number;
-	}
 }//끝
