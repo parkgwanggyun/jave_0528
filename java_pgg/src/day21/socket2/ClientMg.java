@@ -32,7 +32,7 @@ public class ClientMg implements Program{
 	@Override
 	public void run() {
 		int meun = 0;
-		
+		load();
 		do {
 			printMenu();
 			meun = sc.nextInt();

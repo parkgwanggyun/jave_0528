@@ -76,7 +76,6 @@ public class ServerMain {
 		try {
 			list = (List<Contact>)ois.readObject();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
