@@ -85,7 +85,8 @@ public class StockTradingSimulator {
             }
             in.close();
 
-            JSONObject jsonResponse = new JSONObject(response.toString());
+            JSONOb
+            ject jsonResponse = new JSONObject(response.toString());
             JSONObject quote = jsonResponse.getJSONObject("Global Quote");
 
             String symbolOutput = quote.getString("01. symbol");
