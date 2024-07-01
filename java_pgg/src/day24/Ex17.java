@@ -6,8 +6,8 @@ import java.io.IOException;
 public class Ex17 {
 
 	public static void main(String[] args) {
-		try {
-			FileWriter fw = new FileWriter("src/day24/ex17.txt",true);
+		try(FileWriter fw = new FileWriter("src/day24/ex17.txt",true);) {
+			/*파일을 이어 쓰려면 뒤에 true를 추가 */
 			fw.write('a');
 			fw.write('b');
 			fw.write('c');
