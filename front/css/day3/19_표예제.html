@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    min-width: 400px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+}
+.styled-table tbody tr {
+    transition: background-color 0.3s;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f3f3f3;
+}
+    </style>
+
+</head>
+<body>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>예제 제목 1</td>
+                <td>작성자 A</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>예제 제목 2</td>
+                <td>작성자 B</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>예제 제목 3</td>
+                <td>작성자 C</td>
+                <td>300</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
