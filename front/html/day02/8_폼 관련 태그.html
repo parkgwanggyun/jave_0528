@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 관련 태그</title>
+</head>
+<body>
+    <!--
+    form 태그
+    - 서버로 데이터를 전송하는 태그
+    - 속성
+        -action
+         -서버로 보낼 주소 또는 파일
+        -method
+         -데이터 전송 방식
+         -get
+            -기본값
+            -url에 데이터를 추가해서 전송 => 데이터가 url에 노출 => 보안이 취약
+            - 대부분이 get 방식
+            -url 뒤에? 와 함께 사용. name명=값&name명=값 형태로 데이터를 전송
+        -post
+            - http request에 데이터를 추가해서 전송 => 데이터가 url에 노출하지 않음 => 보안이 좋음
+            - 데이터가 노출되면 안되는 경우 => Ex. 회원가입, 로그인
+            - 전송할 파일이 있는 경우 => 파일 전송
+        - enctype
+            - method 속성이 post인 경우에만 사용
+            - 서버로 데이터를 보낼 때 인코딩 방식을 설정
+            -application/x-www-form-urlencoded
+                -기본값, 서버로 보내기 전에 모두 인코딩
+            -multipart/form-data
+                - 모든 문자를 인코딩하지 않음
+                - 서버에 파일을 전송할 때 사용
+            -text/plain
+                -공백 문자는 +로 변환, 나머지는 인코딩하지 않음
+
+    -->
+    <!--
+    fieldset 태그
+      -form태그 안에 요소들을 묶어서 테두리 표시
+    legend 태그
+      - fieldset 태그 안에서 묶인 요소들의 대표 이름을 지정
+    -->
+    <!--
+    input 태그
+      - form태그 안에서 정보를 입력받은 태그
+      - 속성
+        -value : input태그의 초기값을 설정
+        -name
+          - 입력된 값을 서버로 보내기 위해 반드시 지정해야하는 속성
+          - 서버에서 name을 변수명으로 받음
+        -readonly
+          -읽기 전용으로 값을 변경할 수 없음
+          -서버에 데이터 전송 됨
+        -disabled
+          -값을 변경할 수 없음
+          -서버로 데이터가 전송되지 않음
+        -required
+          -필수 항목에 사용
+          -지정된 알림이 보임
+          -지정된 알림말고 다른 방법으로 보여주고 싶으면 reqired는 추가 하지 않고
+            정규표현식을 이용해서 활용
+  
+    -->
+  <form action="" method="get">
+    <fieldset>
+      <legend>개인정보</legend>
+      
+    </fieldset>
+  </form>
+</body>
+</html>
