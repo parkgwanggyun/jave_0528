@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .container{
+        border: 10px solid black;
+        padding: 10px;
+      }
+     .container::after{
+       clear: both; display: block;
+       content: '';
+     }
+     .box{
+       width: calc(50% - 5px);
+       border: 10px solid red;
+       float: left;
+       box-sizing: border-box;
+     }
+     .container :last-child{
+       border-color: blue; float: right;
+     }
+     .content1, .content3{
+      height: 300px;
+      border: 10px solid brown;
+     }
+     .content3, .content4{
+      height: 300px;
+      border: 10px solid aqua;
+      margin-top: 10px;
+     }
+    </style>
+</head>
+<body>
+<div class="container">
+   <div class="box">
+    <div class="content1"></div>
+    <div class="content2"></div>
+   </div>
+   <div class="box">
+    <div class="content3"></div>
+    <div class="content4"></div>
+   </div>
+</div>  
+</body>
+</html>
