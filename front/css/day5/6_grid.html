@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grid</title>
+    <style>
+        .container{
+            display: grid;
+            /* 
+            grid-template-columns
+                -그리드의 열을 지정(개수,크기)
+            grid-template-rows
+                -그리드의 행을 지정(개수,크기)
+            repeat(개수, 크기)
+                -그리드의 행과 열을 지정할 때 사용
+                -같은 크기의 항목들을 여러개 지정할 때 사용하는 함
+            minmax(최소크기,최대크기)
+                -그리드의 행과 열을 지정할 때 사용
+                -한 아이템의 최소너비와 최대너비를 지정
+            auto-fit/auto-fill
+                -컬럼의 개수를 자동으로 조절함
+                -남은 공간을 그대로 둠 : auto-fill
+                -남은 공간이 없도록 아이템을 늘림 : auto-fill
+            */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+        <div class="box4"></div>
+    </div>
+</body>
+</html>
