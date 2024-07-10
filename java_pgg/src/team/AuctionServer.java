@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class AuctionServer {
-    private static final int PORT = 5001;
+    private static final int PORT = 5002;
     private static Set<ClientHandler> clientHandlers = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private static volatile int highestBid = 0;
     private static volatile String highestBidder = "";
@@ -84,12 +84,12 @@ public class AuctionServer {
 
                 // 닉네임 입력 받기
                 nickname = in.readLine();
-                System.out.println("Client connected: " + nickname);
+                System.out.println("입찰자 닉네임: " + nickname);
 
                 // 물품 정보 전송
-                out.println("Item for auction: " + item);
-                out.println("Starting bid: " + highestBid);
-                out.println("Current highest bid: " + highestBid + " by " + (highestBidder.isEmpty() ? "No bids yet" : highestBidder));
+                out.println("경매물품: " + item);
+                out.println("시작가: " + highestBid);
+                out.println("현재 최고가: " + highestBid + (highestBidder.isEmpty() ? "원 이상의 입찰 없음" : highestBidder));
 
                 // 입찰 처리
                 String clientInput;
@@ -100,10 +100,10 @@ public class AuctionServer {
                             int bid = Integer.parseInt(parts[1]);
                             placeBid(nickname, bid);
                         } else {
-                            out.println("Invalid command. Use '입찰 <amount>' format.");
+                            out.println("잘못된 입력입니다.'입찰 <금액>' 으로 작성해주세요.");
                         }
                     } catch (NumberFormatException e) {
-                        out.println("Invalid bid amount. Please enter a valid number.");
+                        out.println("정수를 사용해주세요.");
                     }
                 }
             } catch (IOException e) {
@@ -115,7 +115,7 @@ public class AuctionServer {
                     e.printStackTrace();
                 }
                 clientHandlers.remove(this);
-                System.out.println("Client disconnected: " + nickname);
+                System.out.println("접속 해제: " + nickname);
             }
         }
 

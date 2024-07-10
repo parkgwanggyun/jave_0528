@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class AuctionClient {
     private static final String SERVER_HOST = "localhost";
-    private static final int SERVER_PORT = 5001;
+    private static final int SERVER_PORT = 5002;
 
     public static void main(String[] args) {
         try (
@@ -35,12 +35,12 @@ public class AuctionClient {
             String serverResponse;
             while ((serverResponse = in.readLine()) != null) {
                 System.out.println(serverResponse);
-                if (serverResponse.startsWith("Current highest bid")) {
+                if (serverResponse.startsWith("현재 최고 입찰가")) {
                     break;
                 }
 
                 // 사용자 입력 받기
-                System.out.print("입찰가격 입력 : (Ex. e.g., 입찰 200): ");
+                System.out.print("입찰가격 입력 : (Ex.입찰 200): ");
                 String bidCommand = consoleInput.readLine();
                 out.println(bidCommand); // 서버로 입찰 명령 전송
             }
