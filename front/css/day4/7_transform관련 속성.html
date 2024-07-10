@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+        transform-origin
+            -transform 속성을 이용해서 요소를 변형시킬 때 기준점을 설정
+
+        */
+        .box{
+            width: 200px;height: 100px;
+            border: 3px solid black; margin-bottom: 100px;
+         }
+         .scalex{
+            transform: scaleX(2); transform-origin: 0 0;
+         }
+         .rotateX{
+            transition: transform 0.4s; transform-origin: 0 0;
+         }
+         .rotateX:hover{
+            transform: rotateX(30deg);
+         }
+         .container-style1, .container-style2{
+            display: inline-block;
+            border: 10px solid #f00;
+            transform: perspective(500px) rotateY(-60deg);
+         }
+         .inner-box{
+            width: 100px; height: 100px;
+            background-color: yellow;
+            transform: perspective(500px)rotateY(60deg);
+         }
+         /* 
+         transform-style
+            -여러 가지 변형을 동시에 하는 경우 부모 요소에 적용한 변형을 하위
+            요소에 적용하는 속성
+            -flat : 하위 요소를 평면으로 처리
+            -preserve-3d : 하위 요소들에 3d효과 적용
+         */
+         .container-style2{transform-style: preserve-3d;}
+         .container{
+            perspective: 500px;
+         }
+         .box1, .box2{
+            width: 200px; height: 200px; border: 3px solid black;
+            display: inline-block;
+            background: url(data:image/jpeg;base64,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)
+            center / contain;
+            transform: rotateY(180deg);
+         }
+         /* 
+         backface-visibility
+            -요소의 뒷면을 보일지 안보일지를 결정하는 속성
+            -hidden : 안보임
+            -visible : 보임(기본값)
+         */
+
+         .box2{backface-visibility: hidden;}
+    </style>
+</head>
+<body>
+    <div class="contaienr">
+        <div class="box"></div>
+        <div class="box scalex"></div>
+        <div class="box rotateX"></div>
+        <div class="box style">
+            <div class="container-style1">
+                <div class="inner-box"></div>
+            </div>
+            <div class="container-style2">
+                <div class="inner-box"></div>
+            </div>
+        </div>
+        <div class="backface">
+            <div class="box1"></div>
+            <div class="box2"></div>
+        </div>
+    </div>
+</body>
+</html>
