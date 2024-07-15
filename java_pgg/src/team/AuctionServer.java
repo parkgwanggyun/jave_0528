@@ -6,104 +6,151 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
+class AuctionItem {
+    String name;
+    double startingBid;
+    double highestBid;
+    String highestBidder;
+    Date endTime; // 경매 종료 시간
+    Timer timer; // 타이머 객체
+
+    AuctionItem(String name, double startingBid) {
+        this.name = name;
+        this.startingBid = startingBid;
+        this.highestBid = startingBid;
+        this.highestBidder = "No bidder yet";
+        this.endTime = new Date(System.currentTimeMillis() + auctionTimeSeconds * 1000); // 경매 종료 시간 설정
+        this.timer = new Timer();
+        this.timer.schedule(new AuctionEndTask(), this.endTime);
+    }
+}
+class AuctionEndTask extends TimerTask {
+    public void run() {
+        System.out.println("Auction for item '" + name + "' has ended.");
+		timer.cancel(); // 타이머 종료
+    }
+}
+
+class Auction {
+    List<AuctionItem> items = new ArrayList<>();
+    List<String> bidders = new ArrayList<>();
+
+    void addItem(String name, double startingBid, int auctionTimeSeconds) {
+        AuctionItem item = new AuctionItem(name, startingBid, auctionTimeSeconds);
+        items.add(item);
+        System.out.println("Added item '" + name + "' with starting bid of " + startingBid + " and auction time of " + auctionTimeSeconds + " seconds");
+    }
+
+    void addBidder(String name) {
+        bidders.add(name);
+        System.out.println("Added bidder '" + name + "'");
+    }
+
+    String placeBid(String bidderName, String itemName, double bidAmount) {
+        for (AuctionItem item : items) {
+            if (item.name.equals(itemName)) {
+                if (bidAmount > item.highestBid) {
+                    item.highestBid = bidAmount;
+                    item.highestBidder = bidderName;
+                    return bidderName + " placed a bid of " + bidAmount + " on " + itemName;
+                } else {
+                    return "Bid is lower than the current highest bid.";
+                }
+            }
+        }
+        return "Item not found.";
+    }
+
+    String showHighestBidder(String itemName) {
+        for (AuctionItem item : items) {
+            if (item.name.equals(itemName)) {
+                return "Highest bidder for " + itemName + " is " + item.highestBidder + " with a bid of " + item.highestBid;
+            }
+        }
+        return "Item not found.";
+    }
+
+    String endAuction(String itemName) {
+        for (AuctionItem item : items) {
+            if (item.name.equals(itemName)) {
+                item.timer.cancel(); // 타이머 종료
+                return "Auction for item '" + itemName + "' has ended. Final results: Highest bidder is " + item.highestBidder + " with a bid of " + item.highestBid;
+            }
+        }
+        return "Item not found.";
+    }
+}
 
 public class AuctionServer {
-    private static final int PORT = 5002;
-    private static Set<ClientHandler> clientHandlers = Collections.newSetFromMap(new ConcurrentHashMap<>());
-    private static volatile int highestBid = 0;
-    private static volatile String highestBidder = "";
-    private static String item;
+    private static Auction auction = new Auction();
 
     public static void main(String[] args) {
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            registerItem();
-
-            System.out.println("경매서버 입장 포트 " + PORT);
+        try (ServerSocket serverSocket = new ServerSocket(12345)) {
+            System.out.println("Auction server started...");
             while (true) {
-                Socket clientSocket = serverSocket.accept();
-                ClientHandler clientHandler = new ClientHandler(clientSocket);
-                clientHandlers.add(clientHandler);
-                new Thread(clientHandler).start();
+                new ClientHandler(serverSocket.accept()).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void registerItem() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("경매 물품: ");
-            item = scanner.nextLine();
-            System.out.print("시작가: ");
-            highestBid = scanner.nextInt();
-            scanner.nextLine(); // 공백
-        } catch (InputMismatchException e) {
-            System.err.println("정수 입력해주세요 .");
-            System.exit(1);
-        }
-    }
-
-    public static synchronized void placeBid(String bidder, int bid) {
-        if (bid > highestBid) {
-            highestBid = bid;
-            highestBidder = bidder;
-            broadcast("현재 최고가 : " + bid + " 원 " + bidder);
-        } else {
-            broadcast("입찰 시도자 " + bidder + " 잘못된 입찰가 : " + highestBid);
-        }
-    }
-
-    public static void broadcast(String message) {
-        for (ClientHandler clientHandler : clientHandlers) {
-            clientHandler.sendMessage(message);
-        }
-    }
-
-    private static class ClientHandler implements Runnable {
+    private static class ClientHandler extends Thread {
         private Socket socket;
         private PrintWriter out;
         private BufferedReader in;
-        private String nickname;
 
         public ClientHandler(Socket socket) {
             this.socket = socket;
         }
 
-        @Override
         public void run() {
             try {
                 out = new PrintWriter(socket.getOutputStream(), true);
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                // 닉네임 입력 받기
-                nickname = in.readLine();
-                System.out.println("입찰자 닉네임: " + nickname);
-
-                // 물품 정보 전송
-                out.println("경매물품: " + item);
-                out.println("시작가: " + highestBid);
-                out.println("현재 최고가: " + highestBid + (highestBidder.isEmpty() ? "원 이상의 입찰 없음" : highestBidder));
-
-                // 입찰 처리
-                String clientInput;
-                while ((clientInput = in.readLine()) != null) {
-                    try {
-                        String[] parts = clientInput.split("\\s+");
-                        if (parts.length == 2 && parts[0].equalsIgnoreCase("입찰")) {
-                            int bid = Integer.parseInt(parts[1]);
-                            placeBid(nickname, bid);
-                        } else {
-                            out.println("잘못된 입력입니다.'입찰 <금액>' 으로 작성해주세요.");
-                        }
-                    } catch (NumberFormatException e) {
-                        out.println("정수를 사용해주세요.");
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    String[] parts = inputLine.split(" ");
+                    String command = parts[0];
+                    switch (command) {
+                        case "ADD_ITEM":
+                            String itemName = parts[1];
+                            double startingBid = Double.parseDouble(parts[2]);
+                            auction.addItem(itemName, startingBid);
+                            out.println("Item added.");
+                            break;
+                        case "ADD_BIDDER":
+                            String bidderName = parts[1];
+                            auction.addBidder(bidderName);
+                            out.println("Bidder added.");
+                            break;
+                        case "PLACE_BID":
+                            bidderName = parts[1];
+                            itemName = parts[2];
+                            double bidAmount = Double.parseDouble(parts[3]);
+                            String result = auction.placeBid(bidderName, itemName, bidAmount);
+                            out.println(result);
+                            break;
+                        case "SHOW_HIGHEST_BIDDER":
+                            itemName = parts[1];
+                            result = auction.showHighestBidder(itemName);
+                            out.println(result);
+                            break;
+                        case "END_AUCTION":
+                            result = auction.endAuction();
+                            out.println(result);
+                            break;
+                        default:
+                            out.println("Unknown command.");
+                            break;
                     }
                 }
             } catch (IOException e) {
@@ -114,14 +161,6 @@ public class AuctionServer {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                clientHandlers.remove(this);
-                System.out.println("접속 해제: " + nickname);
-            }
-        }
-
-        public void sendMessage(String message) {
-            if (out != null) {
-                out.println(message);
             }
         }
     }
