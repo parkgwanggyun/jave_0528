@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>속성요소 추가</title>
+</head>
+<body>
+    <button id="btn">이미지 추가</button>
+    <div id="box"></div>
+    <script>
+        const btn = document.getElementById('btn');
+        const box = document.getElementById('box');
+
+        btn.addEventListener('click',function(){
+            /*
+            createAttribute('속성명')
+                - 속성 노드를 생성하여 반환
+            속성노드.value = 값
+                - 속성 노드에 값을 지정
+            요소노드.setAttributeNode(속성노드)
+                - 요소 노드에 속성 노드를 추가
+            */
+            //1. 요소 노드 생성
+            var img = document.createElement('img');
+            //2. 속성노드 생성
+            var src = document.createAttribute('src');
+            var alt = document.createAttribute('alt');
+            var width = document.createAttribute('width');
+           //2-2 속성 노드에 값 지정
+            src.value='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMVFhUXFRYYGBgVFxUVFxgXGhcYFxgaFhUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lHSUtLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLf/AABEIAQIAwwMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYDBAcBAv/EAD8QAAECBAMFBgQDBwIHAAAAAAEAAgMEESEFEjEGQVFxgRMiYZGhsTJCUsFictEHFCOy4fDxM8IkQ1NzgpKi/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAIDAQT/xAAfEQEBAAIDAQEBAQEAAAAAAAAAAQIRAyExEkEiUUL/2gAMAwEAAhEDEQA/AO4oiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAqhj22hl5h0Lsg5raVNSDcA2t4q3rmu18n/AMY8n5mtd0yhvu0rLlysnTXixlva54FtDAmh/Dd3hqx1nDpvHiFLrisSUyOD2ktIuHNJDgeII0Vv2f22IpDmr7hFA/naPceS5hy/mSs+H9xXtFjl47XtDmODmnQtIIPULItmAiIgIteYnoTPjiNbzIr5LUiY9LgV7Sv5QT9ly2R3VSaKMl8fl36RADwdVvut+HHa74XA8iD7JLL4WWesiLxerrgiIgIsceO1jS57g1o1LiAPMql47+0KGyrZdnaO+t1Wsr4DV3opyyk9VjjcvF3JXq4pLzMzNzEMRIhe572gDRrRWpoNAAAT0XawuY5/TueHyIiK0CIiAiIgKobay1IkKNuILD/M3/cretLGJERoToe8jung4XafNRnj9Y6Xhl85bUOZkg4WUBOSTm7lYJWIalrrOaaOadQQtt+HZ1553Hp3pV8GxOLBf/CeWnhq082mx91bpTbl2kWBf6mOoD0It5qtYrhfZxG0Nxc03BZo0GtKaGh087Lm8sfHbjjl3V6dtE0sDg0gnc79QoWdm4sU3e4Dg0kD0WoIldNPRbEKKNfXcu5Z29M5hIxw5BoUnhkJo7pA8FrhwItdY5eZ7w5qZdVVm4k48pDZ3sgryURGgFzs4OV26lj5hbOJzdXUqvhulfey7llu6jmM1N1nk8bjMNInfHE2NOY+6sEDFIThUPAtWhsR5qqxIgWqJgNN9Crx5LE5YSpye2xhMJDWPfTeKAfr6KBxjbWLTuAQh/7O9bDyUW92Z7qCgrv/AL5qPmpbtX9y4FlP3nfVzjxjQm56JGNXOc78zi73W3IYO513WCkJXCi0VIotuE17nCHDFXOs0e5J3AcV02lthsLaI74lLMaGg/idr6D/AOlelpYPh4gQmwxci7j9Tjqf78FurfDH5mnmzy+rsREVpEREBERAREQV/aLB8x7aGO+B3gPmA8N7h6+Si5ScAaSLkbvHkroq1tVhIdljNqC09/KSKt4kDWnsss8df1G2Gf8AzVfnYDnBznNNTv1WEQnBvfNaCylXTTCCASd1VC4jMgGmoA/qvPbG/fiHxbamDLGjzV1CQ0Xr4lYcL26gxzlLTDOgJrSviFRNqHMfHc2tHA0OY5a04ONqc6c1KbLybHx4bWS7mtbCLY4c9zu0q0jPRwo0ZqUDSadFtjxz53WN5L9ajp8pNsFO/UlJ6JQhwtXX9VoYLgUOG3MXE3u4m/8AhSWITEoyjHxmg2sLkfmAuAsbjbOmv1JXsm8PiFzvlHqvJ+ZaaUffX7fdfUt2Dw4worTxym46ajVQ+0GzznNESE8ggivDKSKmnEapjjZ6XLG18zePQIVGxYgzeG7XQr6/f2xQCxwcNxXMccw9rnRz2ha9j8sOG5jnOigWJ7TQEXNPCg3LNsRGdDjFpeKFpq2pOlL2Flplxam4jHk3dOqiwqBW26hvxuvvDwQ6uU330p6BfWFTQuOAW1MRC5rWQ3Ue4gAClannuU7imWZhl1ALudYAakqxYDgzYALiAYjvidwH0jw91sYZhjIQFLvoA55u4nffcK7gt5b44a7rz5Z76giItECIiAiIgIiICIiAvCvUQRk3gUF4PcDDxZ3fQWPVU/abZ5suwOY97sxIIdThuoF0NVjbn/Th2+Yn0WXJjPm1px5Xcm3LJvA2R35qAOOvT3Vo2ewpsEBgaMupAFBc60WjLOyxg4gUdysRvU07FIcJpe9wbXQHjSw9Fjjbem2XSG21xIsFGWAGUU9+a59CxF7X9q2pFCHB2U1cTrzqpbF8T/eHEMLSa3AO+pHqoGaw+K24Y7UcStmXbZh4rEEZ0RxLT8gaAABShBpxqus7Jz/aw6ngNfVcdgyL81XB1uK6DshPtZ3XUAI4ilB49CuiM262e77orKAOPeFTfmBSvWqgtnMILYhe4iwoAGgczrwXUcbgteDppaun96Kpy8uLndW3jdZZZXWl44z1fNmdlyWdpGJbmoQGkVy0sTrSqs0jgsCEczIYzX7x7zr60cdOi25U1Y0/hHsFlW2OEjHLO0REVpEREBERAREQEREBERAREQFE7TSvaQHU1b3h019FLLXnoOdjm8QVyzcdl1XJ32e2ulVDftBkQ6AyICSWvoeFHD9RTqrDOQHMJY4XBIPgVqScYOc6FFa0tfbvCoPCoXmx/mvRe4rGzWMw5aFD/dpZ0d7YnbTbsp7gJLYTA48Dk71xY7zaWg/tFgjKIsu9rwyEHFrWkF5d/HIaflAuN54BR7ZaPh73xIbgC8FpaGgty1NBTetOPj5eaxYEEkb8h6/MtuqjG6Tk9tjh7g5jYb35mtbdjgbxe8KU3Q6u9NbKo43hHZT74MF5LHvZkIJIyRQ1wFQb3J6AKZwvH3NcTAloDIhaWCIGkuaHWOWpsfFb+y+BtlYRmI4o9pIaCag2oCG+d1zqOXdvaYxNxZC7NziQA0A1ud1SsWHS+cttfRo9B6r5ZEExRxNALmu/ot6TxmHKuZFc0PbmytBNLn5gaGlPFY6+q038x1aVh5WNb9LQPIUWVa2GzjY0JkVvwvAI/wArZXreYREQEREBERAREQEREBERARF451BUoMczHaxpe8hrWipJ0AXM9ptuYkUmHLksh6ZhZ7uX0ha+3G0xmH9nDJ7Fh3WznifDgq3KsLjYLDPk/I3w4/2rJgkXP2kM1LmECh1u0HXqvuYkhyWSTkQyZe6po9jb6aaX5FvqtzEJd1KrunNovuubkjDNuB3jr0URM4DBqDW3PdW+5bs1GpVrgd2m5RcWI+4hxAR42ITendbbkrJwIJrcu+UA8ePFZZuG6O7vk0Gg3DooiQLWuq9+d/hfSup4XU9IuJ1oD79U9NaZJPDwe6aZRrrSip23UyXRWQwKNaW5etl0MQ3FuUAAb1UdqsNzTTG76Np+Yk08rpJqueuv7Gg/uMtX/os9lMqN2dmGPl4XZ/C1jW03jKAKHyUktYyvoiIuuCIiAiIgIiICIiAiIgKt7eYgYUsWtNHRDl6fN6W6qyLn37RZ4OishA/A0k83bvIeqjkusV4TeSgxmqZwuSOQGnxKNbDzPA4lXORg3aAvJHprWmcPo1rb5m3bTed1b9NOeqjYm0EWG4smGilaBzLj31V3jyIeym/caA06FVPF5YiHFY+7i00Jr3jbQ+IrY+q9MedpzEVkQVaQa60ooSbwsHQ09FAOc5hsXNI5gocSi/WTzNUuLSdLJh+GZTUEF266s0tAFO8A0i97jzXNW4lEFwSpPEMUiVyF8QDK2uV7m5qtBqaa606JIXtbJzGojc5hNBDBU3FwBcgcN1eKhNnoEWbmu0fXKLuO4D6QtPZuWMSKGNFG5IjTetA5pFSTrfKutYThMOBBayGKUGu8niV1n40cIjGWjU/5byARw4HmFdwqviMqC2tL0U9hcbPCY7i0V5ix9kw6unMu+20iItECIiAiIgIiICIiAiIg+I0QNaXHQAk8hdcbxOKYsV8Q/M4npu9KLpu2EUtlIlPmo3zN/Rc0gtrzXn5r3pvwz9YZCD/EHhdXrC4Nq/30VQlodHV3AK7YcRlCzwm6vO6iUayyicSl63opSq+YkPMF6GE6VCawyFEs+G09L+aj4uxss7QOafB1feqtcaW7yyNgUXF7VKHsRLAXzn/yp7UUdjOz4pVrKuADfiOg0tRdCjQrdFqPlq7kNqrslhAY6pbfWu9dDhaKOlJbKVItXY5ldsMfQhNk3nLFadGxLdRUr2Z0TZT4Yv8A3T/KE/Yj8qdREWiRERAREQEREBERAREQaGOSvawHs35SRzFwuXZaFdgXNNo5HJHeKUqcw5G/6rDmn624b+NIMuPFWnBnVYBwsq3CNqHcrLhQGUFZ8Xq+TxKZab18F68iPstR8ZbsoTcQilLr4hzg6+K1puZsouJNEaaqbdL+dp1s3mcW2stpkQBVSRnaF2axrZSMCbFUl2XFPtLQhiV00UfDmFkhxL6qtosbEwbWWfZ0/wCo3xafMU/2rWe8U1Xmyry6LHdu7g695d32nXSyIiK0iIiAiIgIiICIiAiIgKj7VkOmfytAPv8AdXhUTaBlJh/jQ+YCy5fGnF6jIrKKwYMzuBRMOCXkNCsUnL5WhvBZcc7aZ1jmYlFEYlONhirjRTEVuoIVTx2VzOtcBa1OLE/FWv0J8l8GY3rHLyg4LOYe6imxcrWMwKr7MdwvuWw2TAuQfJfZg+CTEuTBJYz3qOqOasEvFzUI0UZg2DdtFApRou4+Csb5QQn5N3yniN36KtI3AjukcVtbIQ6Q3/UYhrxFhSvRY4MssklDyRgW/NZ3jvHVdnu03zSeREWjMREQEREBERAREQEREBVLbKDR7H/UC08xcehVtVe20hVhMd9L/cf0Uck3ivC/0gsIid/oVaJU2VTw8jOPGvsrJJxNyz4/FZ+sOMAgDLxoq1gcF0ePGYbFoNOYVwnWVA5rBgMkGxojwNQAef8AhXZuuS9KmXAOLXd14NCD9isrYGY0AqToNa+CteL7OMjPz5i0kXoAa8CsWGbKQ4MQRM73UNQHUpVd1XPpXpqVfDAzgsG7Np6rXgODnBjTmLjQAXv9laNumAy1T8r2n7fdV/YQAzFaCzHU9NPNcvV07PNrvhsg2EzKBfeeJUftDCqWHeK/ZTah8XPfA/B91d8RPSX0WFr/AOMz8yyw/hWrLDNGZzr5XUurGiIrSIiICIiAiIgIiICIiAq9tbGGVkPWpqeWisKpGLOJmYgcb7vy0tRZ8l1GnHN1pFuW43aKxwWEGhs4U9RVV6neYCbF7fcK4YrBpSIN1jy49FHH3tXJ0FtWphPxPHI+6+4TqjwXxKCkU+IP2WkZpJERWlUv2jxnNgMoO6Yne8jRVDZSaLZmFQ0q/L0NqLo+1Eh20tEZvpmHNtx7Li8hNFkUO4OB8jVYcnV22w7x076orFh32n8JHqpGXihzWuGjgCOoqtHFPiYOa2vjKMURtG2WDC2Exq/S0+ZstlzqNuvcCZUOf9TvQKY7UoiIrSIiICIiAiIgIiICIiAq7tXh4IEYC7LO8WH9CrEviLDDgWkVBBB5Fcym5p3G6u3NIhO75SCOhXSIbhEYDqHNHqFz6ZkzBiPY6pobE727j5KWwLaNkJhbFdQD4d55UWPH1615O/EpLOLHGGdxty3LbccrmngfQrSbPQpgh8M1qKGooQRcLPGi7itGaYCLFKuqwcllVpeOFbLimO4N2cxEaLAPNORuPRdsXJ9sYodORg7dlpTjlCz5JuNOO9rnsXi7IkFsIvHaMFCOIGhHFSOKPGdgruK4scR7H4TrpTWvDzXSNm4kV0CE6Nmz0vm1pU5a18KJL1ouPaWxB5DeYUvh8LLDYPwjzUXGZmyji4DzIU2FUiK9REVOCIiAiIgIiICIiAiIgIiIKttzCysbGpZvdceAOh8/dcmm8dBrS4HA6X3rv0eC17S1wDmkUIIqCPEKsT2yGHw2EiVhVJ1IqelVGWO+145a6RWwUN37v2rrdoasH4BYE87+isUbRaMOdawAWsKADQDQALJBm61so3PFavqwSLaMbyWwtDBY2aED4keq31rPGdFCYjsnKR3mJEhVeaVIc9taaVykKbRdcQkjsnJwjmZAZmBqC6ryDxGYm6+JuHSK7nUdVPKv4pMDtXDgB9v1XK7GRhoQeBB8lNQ3gioVRjThY4NJua0HK5SXx1zHgEWNSRWxG+nip+pFfFXBFhlZhsRoc02Pp4FZlaBERAREQEREBERAREQEREBUrH8WrEeHWDTlaB6k8zZXVQ0/s1AiuLiHAk1dlcRmINQTXx4KcpbOlY2S9qoYzS2jdctOp3qQw1xiuDW2vzpSym4GzEu0l2VxcTUkvdfoDRSMpJQ4YpDY1v5QB58VE41XP/CQlRChtYDWg10qdSaLYRFqzEREBQGOYbEc8xGAEZDUfMS3QNG+qn0XLNuyuZvmw8hziRkcR3gQakeN/wDC1Zifz1LXCsK/LMDw1Bp6LqjmA6gLC6Rhk1MNleOUKfhf2ruw0dzu0rcEQz4VIP2y+StSxwYLWCjQAOAWRVJqIt3RERdcEREBERAREQEREBERAREQEREBERB4iIg9REQeIiIAXqIgLxEQEC9RAREQf//Z';
+            alt.value = '강아지 이미지';
+            width.value = '100';
+            //3. 요소 노드에 속성 노드를 추가
+            img.setAttributeNode(src);
+            img.setAttributeNode(alt);
+            img.setAttributeNode(width);
+            //4. 기존 요소에 요소노드를 추가
+            box.append(img);
+        })
+    </script>
+</body>
+</html>
