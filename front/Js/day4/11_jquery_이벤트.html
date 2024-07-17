@@ -126,9 +126,9 @@
 			$(this).css('border-color', 'black');
 		})
 		
-		var offset = $('.box4').offset();
-		var x = offset.left;
-		var y = offset.top;
+		var offset = $('.box4').offset();//마우스를 눌렀을 때 박스의 왼쪽 위의 점
+		var x = offset.left;//마우스를 눌렀을 때 x좌표
+		var y = offset.top;//마우스를 눌렀을때 y좌표
 		$('.box4').mousemove(function(e){
 			if(!flag)
 				return;
