@@ -6,12 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date; // java.util.Date로 수정
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 class AuctionItem {
     String name;
@@ -21,20 +20,27 @@ class AuctionItem {
     Date endTime; // 경매 종료 시간
     Timer timer; // 타이머 객체
 
-    AuctionItem(String name, double startingBid) {
+    AuctionItem(String name, double startingBid, int auctionTimeSeconds) {
         this.name = name;
         this.startingBid = startingBid;
         this.highestBid = startingBid;
-        this.highestBidder = "No bidder yet";
+        this.highestBidder = "아직입찰자가 없습니다.";
         this.endTime = new Date(System.currentTimeMillis() + auctionTimeSeconds * 1000); // 경매 종료 시간 설정
         this.timer = new Timer();
-        this.timer.schedule(new AuctionEndTask(), this.endTime);
+        this.timer.schedule(new AuctionEndTask(this), this.endTime); // 수정된 부분
     }
 }
+
 class AuctionEndTask extends TimerTask {
+    private AuctionItem item;
+
+    AuctionEndTask(AuctionItem item) {
+        this.item = item;
+    }
+
     public void run() {
-        System.out.println("Auction for item '" + name + "' has ended.");
-		timer.cancel(); // 타이머 종료
+        System.out.println("경매 물품 '" + item.name + "' 최고 입찰자 : " + item.highestBidder + " 최고 입찰가 : " + item.highestBid);
+        item.timer.cancel(); // 타이머 종료
     }
 }
 
@@ -45,12 +51,12 @@ class Auction {
     void addItem(String name, double startingBid, int auctionTimeSeconds) {
         AuctionItem item = new AuctionItem(name, startingBid, auctionTimeSeconds);
         items.add(item);
-        System.out.println("Added item '" + name + "' with starting bid of " + startingBid + " and auction time of " + auctionTimeSeconds + " seconds");
+        System.out.println("추가된 아이템 '" + name + "' 시작 입찰가 : " + startingBid + " 경매 시간 " + auctionTimeSeconds + " 초");
     }
 
     void addBidder(String name) {
         bidders.add(name);
-        System.out.println("Added bidder '" + name + "'");
+        System.out.println("추가 입찰자  '" + name + "'");
     }
 
     String placeBid(String bidderName, String itemName, double bidAmount) {
@@ -59,32 +65,32 @@ class Auction {
                 if (bidAmount > item.highestBid) {
                     item.highestBid = bidAmount;
                     item.highestBidder = bidderName;
-                    return bidderName + " placed a bid of " + bidAmount + " on " + itemName;
+                    return bidderName + " 입찰 " + bidAmount + " 에 " + itemName;
                 } else {
-                    return "Bid is lower than the current highest bid.";
+                    return "입찰가가 현재 최고 입찰가 보다 낮습니다..";
                 }
             }
         }
-        return "Item not found.";
+        return "항목을 찾을수 없습니다.";
     }
 
     String showHighestBidder(String itemName) {
         for (AuctionItem item : items) {
             if (item.name.equals(itemName)) {
-                return "Highest bidder for " + itemName + " is " + item.highestBidder + " with a bid of " + item.highestBid;
+                return "최고 입찰자 " + itemName + " 입니다. " + item.highestBidder + " 입찰가는 " + item.highestBid;
             }
         }
-        return "Item not found.";
+        return "항목을 찾을수 없습니다.";
     }
 
     String endAuction(String itemName) {
         for (AuctionItem item : items) {
             if (item.name.equals(itemName)) {
                 item.timer.cancel(); // 타이머 종료
-                return "Auction for item '" + itemName + "' has ended. Final results: Highest bidder is " + item.highestBidder + " with a bid of " + item.highestBid;
+                return "경매 품목 : '" + itemName + "' 최종 결과: 최고 입찰자는 다음과 같습니다. " + item.highestBidder + " 입찰가로 " + item.highestBid;
             }
         }
-        return "Item not found.";
+        return "항목을 찾을수 없습니다..";
     }
 }
 
@@ -92,8 +98,8 @@ public class AuctionServer {
     private static Auction auction = new Auction();
 
     public static void main(String[] args) {
-        try (ServerSocket serverSocket = new ServerSocket(12345)) {
-            System.out.println("Auction server started...");
+        try (ServerSocket serverSocket = new ServerSocket(5004)) {
+            System.out.println("경매서버 연결중...");
             while (true) {
                 new ClientHandler(serverSocket.accept()).start();
             }
@@ -120,11 +126,13 @@ public class AuctionServer {
                 while ((inputLine = in.readLine()) != null) {
                     String[] parts = inputLine.split(" ");
                     String command = parts[0];
+                    String result;
                     switch (command) {
                         case "ADD_ITEM":
                             String itemName = parts[1];
                             double startingBid = Double.parseDouble(parts[2]);
-                            auction.addItem(itemName, startingBid);
+                            int auctionTimeSeconds = Integer.parseInt(parts[3]);
+                            auction.addItem(itemName, startingBid, auctionTimeSeconds);
                             out.println("Item added.");
                             break;
                         case "ADD_BIDDER":
@@ -136,7 +144,7 @@ public class AuctionServer {
                             bidderName = parts[1];
                             itemName = parts[2];
                             double bidAmount = Double.parseDouble(parts[3]);
-                            String result = auction.placeBid(bidderName, itemName, bidAmount);
+                            result = auction.placeBid(bidderName, itemName, bidAmount);
                             out.println(result);
                             break;
                         case "SHOW_HIGHEST_BIDDER":
@@ -145,11 +153,12 @@ public class AuctionServer {
                             out.println(result);
                             break;
                         case "END_AUCTION":
-                            result = auction.endAuction();
+                            itemName = parts[1];
+                            result = auction.endAuction(itemName);
                             out.println(result);
                             break;
                         default:
-                            out.println("Unknown command.");
+                            out.println("알 수 없는 명령어.");
                             break;
                     }
                 }
