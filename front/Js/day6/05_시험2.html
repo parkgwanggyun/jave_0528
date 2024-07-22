@@ -1,0 +1,154 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>회원가입</title>
+    <script src="//code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- jquery validation을 사용하기 위해 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <!-- jquery validation에서 regex을 사용하기 위해 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+    <style>
+        body {
+    font-family: sans-serif;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    }
+
+    .container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    }
+
+    .form-group {
+    margin-bottom: 15px;
+    }
+
+    label {
+    display: block;
+    margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    }
+
+    .hint {
+    font-size: 12px;
+    color: #777;
+    }
+
+    button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    }
+    .error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+    }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>회원가입</h2>
+            <form id="signupForm">
+            <div class="form-group">
+                <label for="userid">아이디:</label>
+                <input type="text" id="userid" name="userid" required>
+            </div>
+            <div class="form-group">
+                <label for="password">패스워드:</label>
+                <input type="password" id="password" name="password" required>
+                <span class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="password-confirm">패스워드 확인:</label>
+                <input type="password" id="password-confirm" name="password-confirm" >
+            </div>
+            <div class="form-group">
+                <label for="email">이메일:</label>
+                <input type="email" id="email" name="email"required >
+            </div>
+            <div class="form-group">
+                <label for="address">주소:</label>
+                <input type="text" id="address" name="address"required >
+            </div>
+            <button type="submit">가입</button>
+            </form>
+        </div>
+        <script>
+    $("#signupForm").validate({
+        rules: {
+        userid: {
+            required: true,
+            minlength: 5
+        },
+        password: {
+            required: true,
+            regex : /^[a-zA-Z0-9!@#$]{8,32}$/,
+            
+        },
+        "password-confirm": {
+            required: true,
+            equalTo: "#password"
+        },
+        email: {
+            required: true,
+            email: true
+        },
+        address :{
+            required : true,
+            address : true
+        },
+        },
+        messages: {
+        userid: {
+            required: '필수 항목입니다',
+            minlength: "아이디는 최소 5자 이상이어야 합니다."
+        },
+        password: {
+            required: '필수 항목입니다',
+            regex : "아이디는 영어,숫자,특수문자(!@#$)만 가능하며 , 8~32자이어야 합니다."
+        },
+        "password-confirm": {
+            required: "패스워드 확인을 입력하세요.",
+            equalTo: "패스워드가 일치하지 않습니다."
+        },
+        email: {
+            required: "이메일을 입력하세요.",
+            email: "유효한 이메일 주소를 입력하세요."
+        },
+        address: {
+            required : "주소를 입력하세요.",
+            address: "유효한 주소를 입력하세요."
+        },
+        },
+        errorPlacement: function(error, element) {
+        error.insertAfter(element); 
+        }
+    });
+        $("#password").click(function() { 
+    $(this).next(".error-message").text("영문자 대/소문자 특수문자, 숫자 포함 8 ~ 32자.").show();
+    });
+        </script>
+    </body>
+    </html>
