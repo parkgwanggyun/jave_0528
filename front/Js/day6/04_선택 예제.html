@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../static/jquery_min.js"></script>
+    <style>
+        .box{
+            width: 150px; /* 원하는 너비로 수정 */
+            height: 50px; /* 텍스트가 들어갈 수 있도록 충분한 높이 설정 */
+            border: 3px solid black;
+            line-height: 50px; /* 세로 중앙 정렬을 위한 줄 높이 설정 */
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center; /* 텍스트 가운데 정렬 */
+            box-sizing: border-box; /* 테두리와 패딩을 포함한 크기로 설정 */
+        }
+        .box-list{
+            display: flex; justify-content: space-evenly;
+        }
+        .box-check-list{
+            text-align: center; margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box-list">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+        <div class="box-check-list">
+            <label>
+                <input type="checkbox" name="sports" id="야구">야구
+            </label>
+            <label>
+                <input type="checkbox" name="sports" id="농구">농구
+            </label>
+            <label>
+                <input type="checkbox" name="sports" id="축구">축구
+            </label>
+            <label>
+                <input type="checkbox" name="sports" id="배구">배구
+            </label>
+            <label>
+                <input type="checkbox" name="sports" id="골프">골프
+            </label>
+        </div>
+    </div>
+    <script>
+$(document).ready(function() {
+    var list = [];
+    $("input[type=checkbox]").on("click", function(){
+        if($(this).is(":checked")){
+            list.push(this.id); 
+        } else {
+            for(var i=0;i<list.length;i++){
+                if(list[i] == this.id){
+                    list.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        display(list); 
+    });
+    function display(list){
+        $(".box").text(''); 
+        // 박스 개수만큼만 반복하도록 수정
+        for(var i=0;i<Math.min(list.length, $(".box").length);i++){ 
+            $(".box").eq(i).text(list[i]); 
+        }
+    }
+});
+    </script>
+</body>
+</html>
