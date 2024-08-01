@@ -1,0 +1,3 @@
+#분류별 등록된 제품수를 조회하는쿼리
+select ca_name분류 ,count(pr_ca_num)제품수 from category
+right join product on ca_num = pr_ca_num group by ca_name;
