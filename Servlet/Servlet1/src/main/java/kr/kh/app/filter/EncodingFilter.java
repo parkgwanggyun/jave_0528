@@ -1,4 +1,4 @@
-package servlet1.filter;
+package kr.kh.app.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -10,9 +10,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 
-/**
- * Servlet Filter implementation class EncodingFilter
- */
 @WebFilter("/")
 public class EncodingFilter extends HttpFilter implements Filter {
        
