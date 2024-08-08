@@ -1,4 +1,3 @@
-
 package db.community.service;
 
 import java.io.IOException;
@@ -12,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import db.community.dao.MemberDAO;
 import db.community.model.vo.MemberVO;
+import db.student.dao.SubjectDAO;
 
 public class MemberServiceImp implements MemberService {
 
