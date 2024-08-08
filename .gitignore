@@ -2,5 +2,5 @@
 .classpath
 .project
 .settings/
-
+.MANIFEST.MF
 java_pgg/.gitignore
