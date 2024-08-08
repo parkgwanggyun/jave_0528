@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -19,7 +18,7 @@
 				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
 				<property name="url" value="jdbc:mysql://localhost:3306/community"/>
 				<property name="username" value="root"/>
-				<property name="password" value="4826"/>
+				<property name="password" value="root"/>
 			</dataSource>
 		</environment>
 	</environments>
