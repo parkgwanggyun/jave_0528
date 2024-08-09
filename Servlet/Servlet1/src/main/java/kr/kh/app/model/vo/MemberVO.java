@@ -19,4 +19,8 @@ public class MemberVO {
 	private int me_report;  
 	private String  me_ms_name; 
 	private  Date me_stop;
+	public MemberVO(String id, String pw) {
+	      this.me_id = id;
+	      this.me_pw = pw; 
+	}
 }
