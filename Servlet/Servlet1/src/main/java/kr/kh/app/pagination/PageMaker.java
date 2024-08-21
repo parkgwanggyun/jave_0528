@@ -1,12 +1,10 @@
-package pagination;
+package kr.kh.app.pagination;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public class PageMaker {
-	
+
 	private int startPage;//페이지네이션의 시작 번호
 	private int endPage;//페이지네이션의 마지막 번호
 	private int totalCount;//전체 컨텐츠 수 => endPage 계산 때문에
@@ -27,14 +25,9 @@ public class PageMaker {
 		if(endPage > lastEndPage) {
 			endPage = lastEndPage;
 		}
-		//이전 다음버튼을 한페이지네이션 단위로 이동
 
 		prev = startPage == 1 ? false : true;
 		next = endPage == lastEndPage ? false : true;
-		//이전 다음을 한 페이지 단위로 이동 
-		/*
-		prev = cri.getPage() == 1 ? false : true;
-		next = cri.getPage() == lastEndPage ? false : true;*/
 	}
 
 	public PageMaker(int totalCount, int displayPageNum, Criteria cri) {
@@ -43,6 +36,4 @@ public class PageMaker {
 		this.cri = cri;
 		calculte();
 	}
-	
-	
 }

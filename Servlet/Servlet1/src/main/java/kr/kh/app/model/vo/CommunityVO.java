@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommunityVO {
 	
-	private int co_num;
+	private int co_num; 
 	private String co_name;
 }

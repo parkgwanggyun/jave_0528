@@ -2,8 +2,8 @@ package kr.kh.app.dao;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.app.model.dto.LoginDTO;
 import kr.kh.app.model.vo.MemberVO;
-import kr.kh.app.model.vo.dto.LoginDTO;
 
 public interface MemberDAO {
 

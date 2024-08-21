@@ -10,8 +10,4 @@ import lombok.NoArgsConstructor;
 public class Person {
 	private String name;
 	private int age;
-	
-	public String getTest() {
-		return "테스트입니다";
-	}
 }

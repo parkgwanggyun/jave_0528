@@ -1,4 +1,4 @@
-package kr.kh.app.model.vo.dto;
+package kr.kh.app.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
