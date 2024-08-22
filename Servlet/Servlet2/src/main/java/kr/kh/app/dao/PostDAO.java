@@ -1,3 +1,4 @@
+
 package kr.kh.app.dao;
 
 import java.util.List;
@@ -17,5 +18,13 @@ public interface PostDAO {
 	List<PostVO> selectPostList(@Param("cri")Criteria cri);
 
 	int selectPostTotalCount(@Param("cri")Criteria cri);
+
+	PostVO selectPost(@Param("po_num")String po_num);
+
+	void updatePostView(@Param("po_num")String po_num);
+
+	boolean insertPost(@Param("post")PostVO post);
+
+	boolean updatePost(@Param("post")PostVO post);
 
 }
