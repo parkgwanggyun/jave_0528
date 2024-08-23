@@ -1,4 +1,3 @@
-
 package kr.kh.app.dao;
 
 import java.util.List;
@@ -26,5 +25,7 @@ public interface PostDAO {
 	boolean insertPost(@Param("post")PostVO post);
 
 	boolean updatePost(@Param("post")PostVO post);
+
+	void deletePost(@Param("po_num")String po_num);
 
 }

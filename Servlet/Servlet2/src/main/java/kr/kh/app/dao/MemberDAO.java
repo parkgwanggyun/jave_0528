@@ -1,3 +1,4 @@
+
 package kr.kh.app.dao;
 
 import org.apache.ibatis.annotations.Param;
@@ -9,5 +10,9 @@ public interface MemberDAO {
 	boolean insertMember(@Param("m")MemberVO member);
 
 	MemberVO selectMember(@Param("me_id")String me_id);
+
+	void updateMemberCookie(@Param("user")MemberVO user);
+
+	MemberVO selectMemberBySid(@Param("sid")String sid);
 
 }
