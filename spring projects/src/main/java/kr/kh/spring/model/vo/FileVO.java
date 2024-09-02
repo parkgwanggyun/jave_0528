@@ -1,4 +1,3 @@
-
 package kr.kh.spring.model.vo;
 
 import lombok.Data;

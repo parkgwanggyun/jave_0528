@@ -1,4 +1,3 @@
-
 package kr.kh.spring.dao;
 
 import java.util.List;
@@ -21,5 +20,21 @@ public interface PostDAO {
 	boolean insertPost(@Param("post")PostVO post);
 
 	void insertFile(@Param("file")FileVO fileVo);
+
+	void updateView(@Param("po_num")Integer po_num);
+
+	PostVO selectPost(@Param("po_num")Integer po_num);
+
+	List<FileVO> selectFileList(@Param("po_num")Integer po_num);
+
+	FileVO selectFile(@Param("fi_num")int fi_num);
+
+	void deleteFile(@Param("fi_num")int fi_num);
+
+	boolean updatePost(@Param("post")PostVO post);
+
+	boolean deletePost(@Param("po_num")int po_num);
+
+	boolean insertCommunity(@Param("co_name")String name);
 
 }
