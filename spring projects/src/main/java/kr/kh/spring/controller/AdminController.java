@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.kh.spring.model.vo.CommunityVO;
 import kr.kh.spring.service.PostService;
@@ -36,5 +37,40 @@ public class AdminController {
 		}
 		model.addAttribute("url", "/admin/community");
 		return "/main/message";
+	}
+	
+	/*@GetMapping("/community/delete")
+	public String communityDelete(@RequestParam("co_num")int co_num, Model model) {
+		boolean isDeleted = postService.deleteCommunity(co_num);
+		if(isDeleted) {
+			model.addAttribute("msg","커뮤니티를 삭제했습니다.");
+		}else {
+			model.addAttribute("msg","커뮤니티를 삭제하지 못했습니다.");
+		}
+		model.addAttribute("url","/admin/community");
+		return "/main/message";
+	}*/
+	@GetMapping("/community/delete")
+	public String communityDelete(Model model,int co_num) {
+		boolean res = postService.deleteCommunity(co_num);
+		if(res) {
+			model.addAttribute("msg", "커뮤니티를 삭제했습니다.");
+		}else {
+			model.addAttribute("msg", "커뮤니티를 삭제하지 못했습니다.");
+		}
+		model.addAttribute("url", "/admin/community");
+		return "/main/message";
+	}
+	@RequestMapping("/community/update")
+	public String communityUpdate(Model model,CommunityVO community){
+		boolean res = postService.updateCommunity(community);
+		if(res) {
+			model.addAttribute("msg", "커뮤니티를 삭제했습니다.");
+		}else {
+			model.addAttribute("msg", "커뮤니티를 삭제하지 못했습니다.");
+		}
+		model.addAttribute("url", "/admin/community");
+		return "/main/message";
+		
 	}
 }

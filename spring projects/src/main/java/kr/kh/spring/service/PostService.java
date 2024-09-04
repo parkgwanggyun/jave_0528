@@ -197,4 +197,25 @@ public class PostService {
 		}
 		
 	}
+
+	/*public boolean deleteCommunity(int co_num) {
+		return postDao.dlelteCommunity(co_num);
+	}*/
+	public boolean deleteCommunity(int co_num) {
+		List<CommunityVO> list = postDao.selectCommunityList();		
+		if(list.size() == 1) {
+			return false;
+		}
+		return postDao.deleteCommunity(co_num);
+	}
+
+	public boolean updateCommunity(CommunityVO community) {
+		if(community == null) {
+			return false;
+		}try {
+			return postDao.updateCommunity(community);
+		} catch (Exception e) {
+			return false;
+		}		
+	}
 }
