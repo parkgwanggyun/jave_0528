@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import kr.kh.spring.model.vo.CommunityVO;
 import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.PostVO;
 import kr.kh.spring.pagination.PostCriteria;
+import kr.kh.spring3.model.vo.CommunityVO;
 
 public interface PostDAO {
 

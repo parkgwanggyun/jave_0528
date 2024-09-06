@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.kh.spring.model.vo.CommunityVO;
 import kr.kh.spring.service.PostService;
+import kr.kh.spring3.model.vo.CommunityVO;
 
 @Controller
 @RequestMapping("/admin")

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.kh.spring.model.vo.CommunityVO;
 import kr.kh.spring.model.vo.FileVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.model.vo.PostVO;
@@ -21,6 +20,7 @@ import kr.kh.spring.pagination.Criteria;
 import kr.kh.spring.pagination.PageMaker;
 import kr.kh.spring.pagination.PostCriteria;
 import kr.kh.spring.service.PostService;
+import kr.kh.spring3.model.vo.CommunityVO;
 
 //게시글과 관련된 URL을 처리하는 컨트롤러.
 //URL 시작이 /post로 시작

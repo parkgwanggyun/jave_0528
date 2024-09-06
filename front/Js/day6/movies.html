@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.movie-item {
+    margin: 20px;
+    text-align: center;
+}
+
+.movie-item img {
+    width: 200px;
+    height: 300px;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.movie-item img:hover {
+    transform: scale(1.05);
+}
+
+.movie-item h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+    </style>
+   
+</head>
+<body>
+    <header>
+        <h1>영화 리스트</h1>
+        <nav>
+            <a href="index.html">홈</a>
+            <a href="movies.html">영화 리스트</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="movie-list">
+            <div class="movie-item">
+                <a href="movie-detail.html">
+                    <img src="images/movie1.jpg" alt="영화 1 포스터">
+                    <h3>영화 제목 1</h3>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a href="movie-detail.html">
+                    <img src="images/movie2.jpg" alt="영화 2 포스터">
+                    <h3>영화 제목 2</h3>
+                </a>
+            </div>
+            <div class="movie-item">
+                <a href="movie-detail.html">
+                    <img src="images/movie3.jpg" alt="영화 3 포스터">
+                    <h3>영화 제목 3</h3>
+                </a>
+            </div>
+            <!-- 추가 영화 항목들 -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 영화관 사이트</p>
+        <p>팀원: 팀원1, 팀원2, 팀원3</p>
+    </footer>
+</body>
+</html>

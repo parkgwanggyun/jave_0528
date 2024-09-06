@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.movie-info {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.movie-poster {
+    width: 300px;
+    height: 450px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.movie-details h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.movie-details p {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.movie-details .button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e71a0f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.movie-details .button:hover {
+    background-color: #c4150a;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>영화 제목</h1>
+        <nav>
+            <a href="index.html">홈</a>
+            <a href="movies.html">영화 리스트</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="movie-info">
+            <img src="images/movie1.jpg" alt="영화 포스터" class="movie-poster">
+            <div class="movie-details">
+                <h2>영화 제목 1</h2>
+                <p><strong>감독:</strong> 감독 이름</p>
+                <p><strong>출연:</strong> 배우 1, 배우 2, 배우 3</p>
+                <p><strong>장르:</strong> 액션, 드라마</p>
+                <p><strong>개봉일:</strong> 2024년 9월 1일</p>
+                <p><strong>줄거리:</strong> 이 영화는 ...</p>
+                <a href="#" class="button">예매하기</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 영화관 사이트</p>
+        <p>팀원: 팀원1, 팀원2, 팀원3</p>
+    </footer>
+</body>
+</html>

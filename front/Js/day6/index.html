@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+/* 기본 스타일 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* 메인 화면 히어로 섹션 스타일 */
+.hero {
+    background-image: url('images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+/* 영화 리스트 스타일 */
+#movie-list-container {
+    padding: 20px;
+}
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie-item {
+    margin: 20px;
+    text-align: center;
+}
+
+.movie-item img {
+    width: 200px;
+    height: 300px;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.movie-item img:hover {
+    transform: scale(1.05);
+}
+
+.movie-item h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* 푸터 스타일 */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>영화관 사이트</h1>
+        <nav>
+            <a href="index.html">홈</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>최신 개봉 영화</h2>
+            <p>놓치지 마세요!</p>
+        </section>
+
+        <section id="movie-list-container">
+            <!-- 영화 리스트가 여기에 동적으로 삽입됩니다. -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 영화관 사이트</p>
+        <p>팀원: 팀원1, 팀원2, 팀원3</p>
+    </footer>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const movieListContainer = document.getElementById('movie-list-container');
+
+    // 영화 리스트 데이터
+    const movies = [
+        {
+            title: '영화 제목 1',
+            image: 'images/movie1.jpg',
+            detailPage: 'movie-detail.html'
+        },
+        {
+            title: '영화 제목 2',
+            image: 'images/movie2.jpg',
+            detailPage: 'movie-detail.html'
+        },
+        {
+            title: '영화 제목 3',
+            image: 'images/movie3.jpg',
+            detailPage: 'movie-detail.html'
+        }
+        // 추가 영화 데이터
+    ];
+
+    function renderMovies() {
+        movieListContainer.innerHTML = `
+            <div class="movie-list">
+                ${movies.map(movie => `
+                    <div class="movie-item">
+                        <a href="${movie.detailPage}">
+                            <img src="${movie.image}" alt="${movie.title}">
+                            <h3>${movie.title}</h3>
+                        </a>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    renderMovies();
+});
+    </script>
+</body>
+</html>
