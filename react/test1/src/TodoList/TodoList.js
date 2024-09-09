@@ -60,7 +60,6 @@ function TodoList(){
                         return <li>{value}</li>
                     })
                 }
-
             </ul>
         </div>
     )

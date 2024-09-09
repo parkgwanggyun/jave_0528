@@ -7,7 +7,6 @@ import TodoList from './TodoList/TodoList';
 function App(props) {
   return (
     <div>
-      <span>오늘의 할일</span>
       {/* <Test1/> */}
       {/* <Todo/> */}
       <TodoList/>
